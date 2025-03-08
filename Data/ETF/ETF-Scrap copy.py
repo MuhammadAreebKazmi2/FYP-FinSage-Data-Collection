@@ -20,9 +20,10 @@ options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 service = Service(driver_path)
 driver = webdriver.Chrome(service=service, options=options)
 
-fund = "JSMFETF"  # MIIETF HBLTETF UBLPETF NITGETF NBPGETF ACIETF
+fund = "MP-ETF"  # MP-ETF
 # URL of the page
-url = f"https://sarmaaya.pk/psx/etf/{fund}"
+url = f"https://sarmaaya.pk/mutual-funds/fund/{fund}"
+# url = "https://sarmaaya.pk/psx/etf/MIIETF"
 # url = "https://sarmaaya.pk/psx/etf/HBLTETF"
 # url = "https://sarmaaya.pk/psx/etf/UBLPETF"
 # url = "https://sarmaaya.pk/psx/etf/JSGBPETF" ***** ask Hamza bhai ******
@@ -31,20 +32,21 @@ url = f"https://sarmaaya.pk/psx/etf/{fund}"
 # url = "https://sarmaaya.pk/psx/etf/ACIETF"
 # url = "https://sarmaaya.pk/psx/etf/JSMFETF"
 
-
 driver.get(url)
 
 # Wait for the page and the "All" tab to load
 wait = WebDriverWait(driver, 15)
 try:
     # Wait for the "All" tab to be clickable
-    all_tab = wait.until(EC.element_to_be_clickable((By.ID, "nav-20y-tab")))
+    all_tab = wait.until(EC.element_to_be_clickable((By.ID, "nav-all-tab")))
+    # all_tab = wait.until(EC.element_to_be_clickable((By.ID, "nav-20y-tab")))
+
     all_tab.click()
     print("Selected the 'All' tab successfully.")
 
     # Wait for the graph data to update (adjust condition based on the page's behavior)
     WebDriverWait(driver, 10).until(
-        lambda d: "active" in d.find_element(By.ID, "nav-20y-tab").get_attribute("class")
+        lambda d: "active" in d.find_element(By.ID, "nav-all-tab").get_attribute("class")
     )
     print("Graph data for 'All' loaded.")
 except Exception as e:
@@ -71,11 +73,8 @@ if script_content and "data" in script_content:
     # Convert to a DataFrame
     df = pd.DataFrame(data)
 
-    # Filter out unwanted columns, keeping only 's_close' and 's_date'
-    df = df[['s_close', 's_date']]
-
     # Convert the 's_date' to a datetime object and then format it to 'YYYY-MM-DD'
-    df['Date'] = pd.to_datetime(df['s_date'], format='%b %d, %y').dt.strftime('%Y-%m-%d')
+    df['Date'] = pd.to_datetime(df['s_date'], format='%b %d, %Y').dt.strftime('%Y-%m-%d')
 
     # Rename the columns
     df = df[['Date', 's_close']]  # Keep only 'Date' and 's_close'
