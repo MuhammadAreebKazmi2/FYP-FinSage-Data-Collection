@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
+driver_path = "E:\\Final Semester\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker\\chromedriver.exe"
 
 # Chrome options
 options = Options()
