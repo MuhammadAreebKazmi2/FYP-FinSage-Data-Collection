@@ -8,7 +8,7 @@ import json
 import pandas as pd
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
+# driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
 
 # Chrome options
 options = Options()
@@ -16,15 +16,22 @@ options.add_argument("--disable-gpu")  # Suppress GPU errors
 options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 
 # Initialize the WebDriver
-service = Service(driver_path)
+# service = Service(driver_path)
+service = Service()
 driver = webdriver.Chrome(service=service, options=options)
+
+# FUND = 'AHPF-E_Al-Habib-Pension-Fund'
+# FUND = 'APFE-Atlas-Pension-Fund'
+# FUND = 'FPFE-Al-Falah-Pension-Fund'
+# FUND = 'PPFE-Pakistan-Pension-Fund'
+FUND = 'URSF-E_UBL-Pension-Fund'
 
 # URL of the page
 # url = "https://sarmaaya.pk/mutual-funds/fund/19d82c95-ad27-4b51-bb1d-a2790f22d9eb" # Atlas APFE
 # url = "https://sarmaaya.pk/mutual-funds/fund/588f65fb-69cf-44b2-a7ad-5a186dc7effa" # Pakistan Pension PPFE
-# url = "https://sarmaaya.pk/mutual-funds/fund/0c35e4f0-835f-481d-a01b-e625227c2f25" # UBL Pension Fund
+url = "https://sarmaaya.pk/mutual-funds/fund/0c35e4f0-835f-481d-a01b-e625227c2f25" # UBL Pension Fund
 # url = "https://sarmaaya.pk/mutual-funds/fund/31c18202-70f8-4a33-888e-9d6c7ec76916" # Al Habib AHPF-E
-url = "https://sarmaaya.pk/mutual-funds/fund/edde3f8c-0be6-4277-a8e6-c20d59e8beb9" # Al-Falah FPFE
+# url = "https://sarmaaya.pk/mutual-funds/fund/edde3f8c-0be6-4277-a8e6-c20d59e8beb9" # Al-Falah FPFE
 
 driver.get(url)
 
@@ -69,7 +76,7 @@ if script_content and "data" in script_content:
     df = pd.DataFrame(data)
 
     # Save to CSV
-    csv_path = "graph_data.csv"
+    csv_path = f"D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\VPS-Equity\\{FUND}.csv"
     df.to_csv(csv_path, index=False)
     print(f"Data saved to {csv_path}")
 else:

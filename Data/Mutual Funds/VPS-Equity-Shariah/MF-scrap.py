@@ -8,7 +8,7 @@ import json
 import pandas as pd
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
+# driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
 
 # Chrome options
 options = Options()
@@ -16,16 +16,23 @@ options.add_argument("--disable-gpu")  # Suppress GPU errors
 options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 
 # Initialize the WebDriver
-service = Service(driver_path)
+# service = Service(driver_path)
+service = Service()
 driver = webdriver.Chrome(service=service, options=options)
+
+# FUND = 'AHIPF-Al-Habib-Islamic-Pension-Fund'
+# FUND = 'AIRSF-Al-Ameen-Ret-Savings-Fund'
+# FUND = 'HIPFE-HBL-Islamic-Pension-Fund'
+# FUND = 'JSIPSFE-JS-Islamic-Pension-Fund'
+FUND = 'NAFA-Islamic-Pension-Fund'
 
 # URL of the page
 # Shariah Compliant VPS Equity
 # url = "https://sarmaaya.pk/mutual-funds/fund/a56a55a8-e488-4002-9a97-8871f7259c3c" # Shariah Comp Al Habib Islamic Pension
-# url = "https://sarmaaya.pk/mutual-funds/fund/82892774-289c-45a9-beb2-855fa35fc9e9" # NAFA Islamic Pension Fund
+url = "https://sarmaaya.pk/mutual-funds/fund/82892774-289c-45a9-beb2-855fa35fc9e9" # NAFA Islamic Pension Fund
 # url = "https://sarmaaya.pk/mutual-funds/fund/be051e99-e6e5-4809-9a84-6540b9d4f4e7" # AIRSF Al-Ameen Retirement Savings
 # url = "https://sarmaaya.pk/mutual-funds/fund/c842f575-d347-4ac4-baf3-3c1752144471" # HBL HIPFE
-url = "https://sarmaaya.pk/mutual-funds/fund/7195a5d6-ecb4-488e-af54-872b7e8d37d1"  # JSIPSFE JS Islamic fund
+# url = "https://sarmaaya.pk/mutual-funds/fund/7195a5d6-ecb4-488e-af54-872b7e8d37d1"  # JSIPSFE JS Islamic fund
 
 driver.get(url)
 
@@ -70,7 +77,7 @@ if script_content and "data" in script_content:
     df = pd.DataFrame(data)
 
     # Save to CSV
-    csv_path = "graph_data.csv"
+    csv_path = f"D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\VPS-Equity-Shariah\\{FUND}.csv"
     df.to_csv(csv_path, index=False)
     print(f"Data saved to {csv_path}")
 else:

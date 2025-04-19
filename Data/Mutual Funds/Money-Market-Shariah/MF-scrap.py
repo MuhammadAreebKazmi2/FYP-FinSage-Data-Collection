@@ -8,7 +8,7 @@ import json
 import pandas as pd
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
+# driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
 
 # Chrome options
 options = Options()
@@ -16,15 +16,20 @@ options.add_argument("--disable-gpu")  # Suppress GPU errors
 options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 
 # Initialize the WebDriver
-service = Service(driver_path)
+# service = Service(driver_path)
+service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
-fund = "ABL-Money-Fund"
+# fund = "ABL-Money-Fund"
+# fund = "HBL-ISF-Money-Fund"
+# fund = "AIMF-Atlas-Money-Fund"
+# fund = "AKD-Money-Fund"
+fund = "FICF-Money-Fund"
 # URL of the page
 # url = "https://sarmaaya.pk/mutual-funds/fund/9747efd9-f18e-435e-985e-7bd1e98a9de1" # AKD Islamic Daily Fund Dividend
-url = "https://sarmaaya.pk/mutual-funds/fund/bc148449-d667-4cb2-9cd9-86d900a2e1ed" # ABL Money Market Plan I
+# url = "https://sarmaaya.pk/mutual-funds/fund/bc148449-d667-4cb2-9cd9-86d900a2e1ed" # ABL Money Market Plan I
 # url = "https://sarmaaya.pk/mutual-funds/fund/6eaf7ec6-0633-4003-96d9-d131951370f0" # HBL ISF
-# url= "https://sarmaaya.pk/mutual-funds/fund/97c814f9-3854-4ac1-9043-044381d9ac72" #FICF Faysal Islamic Cash-Fund
+url= "https://sarmaaya.pk/mutual-funds/fund/97c814f9-3854-4ac1-9043-044381d9ac72" #FICF Faysal Islamic Cash-Fund
 # url = "https://sarmaaya.pk/mutual-funds/fund/6142c280-ada7-45cf-8a7f-32e8f4db37ba" # AIMF Atlas Islamic
 
 
@@ -70,8 +75,10 @@ if script_content and "data" in script_content:
         formatted_data = []
         for entry in data:
             formatted_entry = {
-                'Date': entry.get('date', ''),
-                'Price': entry.get('price', '')  # Assuming 'price' is the price field
+                # 'Date': entry.get('date', ''),
+                # 'Price': entry.get('price', '')  # Assuming 'price' is the price field
+                'Date': entry.get('s_date', ''),
+                'Price': entry.get('s_close', '')  # Assuming 'price' is the price field
             }
             formatted_data.append(formatted_entry)
 
@@ -79,7 +86,7 @@ if script_content and "data" in script_content:
         df = pd.DataFrame(formatted_data)
 
         # Save to CSV
-        csv_path = f"E:\\Final Semester\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Money-Market-Shariah\\{fund}.csv"
+        csv_path = f"D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Money-Market-Shariah\\{fund}.csv"
         df.to_csv(csv_path, index=False)
         print(f"Data saved to {csv_path}")
     else:

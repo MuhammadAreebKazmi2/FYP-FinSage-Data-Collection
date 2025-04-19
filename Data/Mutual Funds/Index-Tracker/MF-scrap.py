@@ -84,7 +84,7 @@ if script_content and "data" in script_content:
     df = pd.DataFrame(formatted_data, columns=["Date", "Price"])
 
     # Save to CSV
-    csv_path = f"E:\\Final Semester\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker\\{fund}.csv"
+    csv_path = f"D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker\\{fund}.csv"
     df.to_csv(csv_path, index=False)
     print(f"Data saved to {csv_path}")
 else:

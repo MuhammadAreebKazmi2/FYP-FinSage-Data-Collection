@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker\\chromedriver.exe"
+# driver_path = "D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker\\chromedriver.exe"
 
 # Chrome options
 options = Options()
@@ -17,7 +17,7 @@ options.add_argument("--disable-gpu")  # Suppress GPU errors
 options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 
 # Initialize the WebDriver
-service = Service(driver_path)
+service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
 # URL of the page
@@ -85,7 +85,7 @@ if script_content and "data" in script_content:
     df = pd.DataFrame(formatted_data, columns=["Date", "Price"])
 
     # Save to CSV
-    csv_path = f"E:\\Final Semester\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker-Shariah\\{fund}.csv"
+    csv_path = f"D:\\Github Repos\\FYP-FinSage-Data-Collection\\Data\\Mutual Funds\\Index-Tracker-Shariah\\{fund}.csv"
     df.to_csv(csv_path, index=False)
     print(f"Data saved to {csv_path}")
 else:
