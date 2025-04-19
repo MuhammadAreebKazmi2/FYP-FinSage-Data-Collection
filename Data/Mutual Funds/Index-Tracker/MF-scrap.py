@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 
 # Path to your WebDriver
-driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chromedriver.exe"
+# driver_path = "E:\\Final Semester\\FYP\\Data\\Scraping\\Mutual Funds\\chrome.exe"
 
 # Chrome options
 options = Options()
@@ -17,8 +17,8 @@ options.add_argument("--disable-gpu")  # Suppress GPU errors
 options.add_argument("--ignore-certificate-errors")  # Suppress SSL errors
 
 # Initialize the WebDriver
-service = Service(driver_path)
-driver = webdriver.Chrome(service=service, options=options)
+service = Service()
+driver = webdriver.Chrome()
 
 # URL of the page
 url = "https://sarmaaya.pk/mutual-funds/fund/3e357642-41f4-47f9-8ec2-8af48c889e77"  # Index Tracker AKDITF
